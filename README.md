@@ -1,6 +1,6 @@
 # rta-transient-receiver
 
-Plugin used to receive VoEvents from different instruments, used for AGILE and AFIS project.
+Plugin used to receive VoEvents from different instruments, it supports the GCN Network and chimenet. It is used for AGILE and AFIS project.
 
 ## Installation
 The dependencies are listed in the file requirement.txt. It is recommended to install them into a venv enviromnent.
