@@ -20,6 +20,7 @@ DUMMY_VOEVENT_INTEGRAL = u"""
     </Author>
   </Who>
   <What>
+    <Param name="TrigID" value="7654321" ucd="meta.id" />
     <Param ucd="phot.mag" value="18.77" name="mag" dataType="float"/>
     <Group name="historic">
       <Param ucd="phot.mag" value="19.62" name="hist_mag" dataType="float"/>
@@ -39,7 +40,7 @@ DUMMY_VOEVENT_INTEGRAL = u"""
         <AstroCoords coord_system_id="UTC-FK5-GEO">
           <Time unit="s">
             <TimeInstant>
-              <ISOTime>2022-05-09T08:07:00</ISOTime>
+              <ISOTime>2022-05-30T11:10:32</ISOTime>
             </TimeInstant>
           </Time>
           <Position2D unit="deg">
@@ -62,7 +63,7 @@ DUMMY_VOEVENT_INTEGRAL = textwrap.dedent(DUMMY_VOEVENT_INTEGRAL).strip().encode(
 
 DUMMY_VOEVENT_AGILE = u"""
 <?xml version='1.0' encoding='UTF-8'?>
-<voe:VOEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:voe="http://www.ivoa.net/xml/VOEvent/v2.0" xsi:schemaLocation="http://www.ivoa.net/xml/VOEvent/v2.0 http://www.ivoa.net/xml/VOEvent/VOEvent-v2.0.xsd" version="2.0" role="test" ivorn="ivo://dummy.txt#1">
+<voe:VOEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:voe="http://www.ivoa.net/xml/VOEvent/v2.0" xsi:schemaLocation="http://www.ivoa.net/xml/VOEvent/v2.0 http://www.ivoa.net/xml/VOEvent/VOEvent-v2.0.xsd" version="2.0" role="test" ivorn="ivo://AGILE.txt#1">
   <Who>
     <Description>VOEvent created with voevent-parse, version 1.0.3. See https://github.com/timstaley/voevent-parse for details.</Description>
     <AuthorIVORN>ivo://AGILE_MCAL_TRIGGER/</AuthorIVORN>
@@ -73,6 +74,7 @@ DUMMY_VOEVENT_AGILE = u"""
     </Author>
   </Who>
   <What>
+  <Param name="TrigID" value="1234567" ucd="meta.id" />
     <Param ucd="phot.mag" value="18.77" name="mag" dataType="float"/>
     <Group name="historic">
       <Param ucd="phot.mag" value="19.62" name="hist_mag" dataType="float"/>
@@ -345,7 +347,7 @@ DUMMY_VOEVENT_LIGO = u"""
 <?xml version="1.0" encoding="UTF-8"?>
 <voe:VOEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:voe="http://www.ivoa.net/xml/VOEvent/v2.0" xsi:schemaLocation="http://www.ivoa.net/xml/VOEvent/v2.0 http://www.ivoa.net/xml/VOEvent/VOEvent-v2.0.xsd" version="2.0" role="test" ivorn="ivo://gwnet/LVC#MS220530p-2-Preliminary">
   <Who>
-    <Date>2022-05-30T15:24:19</Date>
+    <Date>2022-05-30T11:10:31</Date>
     <Author>
       <contactName>LIGO Scientific Collaboration and Virgo Collaboration</contactName>
     </Author>
@@ -431,7 +433,7 @@ DUMMY_VOEVENT_LIGO = u"""
         <AstroCoords coord_system_id="UTC-FK5-GEO">
           <Time unit="s">
             <TimeInstant>
-              <ISOTime>2022-05-30T15:17:41</ISOTime>
+              <ISOTime>2022-05-30T11:10:31</ISOTime>
             </TimeInstant>
           </Time>
         </AstroCoords>

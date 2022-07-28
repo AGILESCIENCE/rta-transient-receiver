@@ -45,7 +45,7 @@ class Voevent(object):
         self.LIGO = False
         self.AGILE = False
         self.mark_notice()
-
+        self.ste = self.is_ste()
         self.instrumentId = self.get_instrumentid_from_packet_type()
         self.seqNum = -1
         self.triggerId = self.get_triggerID()
@@ -62,12 +62,14 @@ class Voevent(object):
         self.url = self.get_url()
         self.contour = self.get_contour()
         self.attributes = self.get_ligo_attributes()
+        
     
 
     def mark_notice(self):
         """
         The only common parameter is ivorn, we discriminate among notices using this parameter
         """
+        print(f"ivorn is {self.voevent.attrib['ivorn']}")
         
         if "gcn" in self.voevent.attrib['ivorn']:
             self.GCN = True
@@ -86,7 +88,13 @@ class Voevent(object):
             return
         
         
-        raise Exception("Notice not supported")
+        raise Exception(f"Notice not supported  ivorn is {self.voevent.attrib['ivorn']}")
+
+    def is_ste(self):
+        if self.AGILE or self.INTEGRAL:
+            return 1
+        else:
+            return 0
     
     
     def get_instrumentid_from_packet_type(self):
@@ -134,6 +142,8 @@ class Voevent(object):
             return 24 
         if self.INTEGRAL: # INTEGRAL subthrsld from James Rodi
             return 23
+        if self.AGILE:  #AGILE MCAL subtrheshold from AGILE's TEAM
+            return 5
         log.info("Voevent not supported")
         raise Exception("Voevent not supported")
 
@@ -156,7 +166,7 @@ class Voevent(object):
         220530p -> 22053016 (p is 16th)
         """
 
-        if self.GCN:
+        if self.GCN or self.INTEGRAL or self.AGILE:
             top_params = vp.get_toplevel_params(self.voevent)
             return top_params["TrigID"]["value"]
 
@@ -201,6 +211,8 @@ class Voevent(object):
             return 4
         if self.INTEGRAL:
             return 6
+        if self.AGILE:
+            return 7
 
     def get_l_b(self):
 

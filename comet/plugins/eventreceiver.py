@@ -55,7 +55,7 @@ class EventReceiver(object):
             #insert
             #####################
 
-            query = f"INSERT INTO receivedsciencealert (instrumentid, networkid, time, triggerid) VALUES ({voevent.instrumentId}, {voevent.networkId}, {voevent.isoTime}, {voevent.triggerId});"
+            query = f"INSERT INTO receivedsciencealert (instrumentid, networkid, time, triggerid, ste) VALUES ({voevent.instrumentId}, {voevent.networkId}, {voevent.isoTime}, {voevent.triggerId}, {voevent.ste});"
             #print(f"query1 {query}")
             cursor.execute(query)
             cnx.commit()
