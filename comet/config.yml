@@ -1,0 +1,6 @@
+afiss_database:
+    user: 'afiss'
+    password: ''
+    host: '127.0.0.1'
+    port: 60306
+    database: 'afiss_rta_pipe_test_3'
