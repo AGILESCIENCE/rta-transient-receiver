@@ -7,6 +7,6 @@ setup(
     packages=['comet/plugins', "comet/plugins/test"],
     include_package_data=True,
     package_data = {'mypkg': [
-                         'comet/plugins/*.yml']}
+                         'comet/plugins/*.yml']},
     license='GPL-3.0'
 )
