@@ -19,6 +19,8 @@ from astropy.coordinates import SkyCoord
 
 from comet.plugins.Voevent import Voevent
 
+db_config = {user: 'afiss', password: '', host: '127.0.0.1', port: 60306, database: 'afiss_rta_pipe_test_3'}
+
 # Event handlers must implement IPlugin and IHandler.
 @implementer(IPlugin, IHandler)
 class EventReceiver(object):
@@ -30,13 +32,10 @@ class EventReceiver(object):
     def add_notice_mysql(self, voevent):
         
         try:
-            with open('config.yml') as f:
-                db_config = yaml.load(f, Loader=yaml.FullLoader)
 
-
-            cnx = mysql.connector.connect(user=db_config['afiss_database']['user'], password=os.environ["MYSQL_AFISS"],
-                              host=['afiss_database']['host'], port=['afiss_database']['port'],
-                              database=['afiss_database']['database'])
+            cnx = mysql.connector.connect(user=db_config['user'], password=os.environ["MYSQL_AFISS"],
+                              host=['host'], port=['port'],
+                              database=['database'])
 
         except mysql.connector.Error as err:
             if err.errno == mysql.connector.errorcode.ER_ACCESS_DENIED_ERROR:
