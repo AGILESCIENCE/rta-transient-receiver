@@ -70,21 +70,19 @@ DUMMY_VOEVENT_AGILE = u"""
     <Date>2022-05-30T11:10:32</Date>
     <Author>
       <contactName>Andrea Bulgarelli</contactName>
-      <title>Hotwired VOEvent Hands-on</title>
+      <title>AGILE-MCAL TRIGGER ALERT NOTICE</title>
     </Author>
   </Who>
   <What>
-  <Param name="TrigID" value="1234567" ucd="meta.id" />
-    <Param ucd="phot.mag" value="18.77" name="mag" dataType="float"/>
-    <Group name="historic">
-      <Param ucd="phot.mag" value="19.62" name="hist_mag" dataType="float"/>
-      <Param ucd="phot.mag" value="0.07" name="hist_scatter" dataType="float"/>
-    </Group>
-    <Param ucd="phot.mag" value="18.77" name="mag" dataType="float"/>
-    <Group name="historic">
-      <Param ucd="phot.mag" value="19.62" name="hist_mag" dataType="float"/>
-      <Param ucd="phot.mag" value="0.07" name="hist_scatter" dataType="float"/>
-    </Group>
+  <Param name="TrigID" value="585679841" ucd="meta.id" />
+  <Param name="grb.total.counts" value="29" ucd="" unit="counts"/>
+  <Param name="grb.signif" value="3.40" ucd="" unit="sigma" />
+  <Param name="background" value="15" ucd="" unit="counts/0.032 sec" />
+  <Param name="data.time.scale" value="0.032" ucd="" unit="sec" />
+  <Param name="integ.time" value="0.029" ucd="" unit="sec" />
+  <Param name="energy.min" value="400" ucd="" unit="keV" />
+  <Param name="energy.max" value="100000" ucd="" unit="keV" />
+  <Param name="light.curve" value="http://www.agilescienceapp.it/notices/079290_GRB_585679841.693873.png" ucd="" />
   </What>
   <WhereWhen>
     <ObsDataLocation>
@@ -110,7 +108,7 @@ DUMMY_VOEVENT_AGILE = u"""
       </ObservationLocation>
     </ObsDataLocation>
   </WhereWhen>
-  <Description>This is not an official AGILE data product.</Description>
+  <Description>AGILE-MCAL TRIGGER ALERT NOTICE</Description>
 </voe:VOEvent>"""
 DUMMY_VOEVENT_AGILE = textwrap.dedent(DUMMY_VOEVENT_AGILE).strip().encode('UTF-8')
 
