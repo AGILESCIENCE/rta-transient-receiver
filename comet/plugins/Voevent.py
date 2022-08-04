@@ -121,6 +121,8 @@ class Voevent(object):
                 return 1
             elif packet_type in [125,128]: #FERMI_LAT 
                 return 2
+            elif packet_type == 105: #AGILE_MCAL FROM GCN
+                return 5
             elif packet_type in [150, 151, 152, 163]: #LIGO and LIGO_TEST TBD
                 if  "test" in self.voevent.attrib['role']:
                     return 19
@@ -134,6 +136,14 @@ class Voevent(object):
                 return 21
             elif packet_type == 174: #ICECUBE_ASTROTRACK_GOLD
                 return 22
+            elif packet_type == 59: #KONUS
+                return 25
+            elif packet_type == 134: #MAXI_UNKNOWN
+                return 26
+            elif packet_type == 135: #MAXI_KNOWN
+                return 27
+            #elif packet_type == 175: #SK_SN NOT SUPPORTED
+                #return 28
             else:
                 log.info(f"Voevent with packet type {packet_type} not supported")
                 raise Exception(f"Voevent with packet type {packet_type} not supported")

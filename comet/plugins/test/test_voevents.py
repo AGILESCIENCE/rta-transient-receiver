@@ -776,3 +776,199 @@ DUMMY_VOEVENT_GCN_FERMI = u"""
 </voe:VOEvent>
 """
 DUMMY_VOEVENT_GCN_FERMI = textwrap.dedent(DUMMY_VOEVENT_GCN_FERMI).strip().encode('UTF-8')
+
+DUMMY_VOEVENT_GCN_MAXI = u"""
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<voe:VOEvent
+      ivorn="ivo://nasa.gsfc.gcn/MAXI#Test_Pos_2022-08-03T18:49:15.00_599999-0-370"
+      role="test" version="2.0"
+      xmlns:voe="http://www.ivoa.net/xml/VOEvent/v2.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.ivoa.net/xml/VOEvent/v2.0  http://www.ivoa.net/xml/VOEvent/VOEvent-v2.0.xsd" >
+  <Who>
+    <AuthorIVORN>ivo://nasa.gsfc.tan/gcn</AuthorIVORN>
+    <Author>
+      <shortName>MAXI (via VO-GCN)</shortName>
+      <contactName>Motoko Serino</contactName>
+      <contactEmail>motoko@crab.riken.jp</contactEmail>
+    </Author>
+    <Date>2022-08-03T18:49:23</Date>
+    <Description>This VOEvent message was created with GCN VOE version: 15.08 17jun22</Description>
+  </Who>
+  <What>
+    <Param name="Packet_Type"      value="136" />
+    <Param name="Pkt_Ser_Num"      value="288" />
+    <Param name="TrigID"           value="599999" ucd="meta.id" />
+    <Param name="Event_TJD"        value="19794" unit="days" ucd="time" />
+    <Param name="Event_SOD"        value="67755.00" unit="sec" ucd="time" />
+    <Param name="Event_Flux"       value="39.8" unit="mCrab" ucd="phot.flux" />
+    <Param name="Src_LoBand_Flux"  value="0.0" unit="mCrab" ucd="phot.flux" />
+    <Param name="Src_MeBand_Flux"  value="0.0" unit="mCrab" ucd="phot.flux" />
+    <Param name="Src_HiBand_Flux"  value="0.0" unit="mCrab" ucd="phot.flux" />
+    <Param name="Bkg_LoBand_Flux"  value="0.0" unit="mCrab" ucd="phot.flux" />
+    <Param name="Bkg_MeBand_Flux"  value="0.0" unit="mCrab" ucd="phot.flux" />
+    <Param name="Bkg_HiBand_Flux"  value="0.0" unit="mCrab" ucd="phot.flux" />
+    <Param name="Event_TimeScale"  value="30s" ucd="meta.id" />
+    <Param name="Event_EBand"      value="Low, 2-4 keV" ucd="meta.id" />
+    <Param name="Trigger_ID"       value="0x4" />
+    <Param name="Misc_flags"       value="0x40000005" />
+    <Param name="SC_Long"          value="123.45" unit="deg" ucd="pos.earth.lon" />
+    <Param name="SC_Lat"           value="622.03" unit="deg" ucd="pos.earth.lat" />
+    <Group name="Trigger_ID" >
+<Param name="Spatial_Prox_Match"    value="false" />
+      <Param name="Temporal_Prox_Match"   value="false" />
+      <Param name="Test_Submission"       value="false" />
+    </Group>
+    <Group name="Misc_Flags" >
+      <Param name="Values_Out_of_Range"   value="false" />
+      <Param name="Gnd_Generated"         value="true" />
+    </Group>
+    <Param name="Coords_Type"      value="1" unit="dn" />
+    <Param name="Coords_String"    value="source_object" />
+    <Group name="Obs_Support_Info" >
+      <Description>The Sun and Moon values are valid at the time the VOEvent XML message was created.</Description>
+      <Param name="Sun_RA"        value="133.88" unit="deg" ucd="pos.eq.ra" />
+      <Param name="Sun_Dec"       value="17.35" unit="deg" ucd="pos.eq.dec" />
+      <Param name="Sun_Distance"  value="101.55" unit="deg" ucd="pos.angDistance" />
+      <Param name="Sun_Hr_Angle"  value="-7.89" unit="hr" />
+      <Param name="Moon_RA"       value="200.03" unit="deg" ucd="pos.eq.ra" />
+      <Param name="Moon_Dec"      value="-5.97" unit="deg" ucd="pos.eq.dec" />
+      <Param name="MOON_Distance" value="63.88" unit="deg" ucd="pos.angDistance" />
+      <Param name="Moon_Illum"    value="32.38" unit="%" ucd="arith.ratio" />
+      <Param name="Galactic_Long" value="57.33" unit="deg" ucd="pos.galactic.lon" />
+      <Param name="Galactic_Lat"  value="39.46" unit="deg" ucd="pos.galactic.lat" />
+      <Param name="Ecliptic_Long" value="242.52" unit="deg" ucd="pos.ecliptic.lon" />
+      <Param name="Ecliptic_Lat"  value="56.73" unit="deg" ucd="pos.ecliptic.lat" />
+    </Group>
+    <Description>Type=136: A set of test coordinates with the same format and content as Type=134 to allow for practicing.</Description>
+  </What>
+  <WhereWhen>
+    <ObsDataLocation>
+      <ObservatoryLocation id="GEOLUN" />
+      <ObservationLocation>
+        <AstroCoordSystem id="UTC-FK5-GEO" />
+        <AstroCoords coord_system_id="UTC-FK5-GEO">
+          <Time unit="s">
+            <TimeInstant>
+              <ISOTime>2022-08-03T18:49:15.00</ISOTime>
+            </TimeInstant>
+          </Time>
+          <Position2D unit="deg">
+<Name1>RA</Name1>
+            <Name2>Dec</Name2>
+            <Value2>
+              <C1>252.0000</C1>
+              <C2>35.0000</C2>
+            </Value2>
+            <Error2Radius>1.0000</Error2Radius>
+          </Position2D>
+        </AstroCoords>
+      </ObservationLocation>
+    </ObsDataLocation>
+  <Description>The RA,Dec coordinates are of the type: source_object.</Description>
+  </WhereWhen>
+  <How>
+    <Description>MAXI Instrument, ISS</Description>
+    <Reference uri="http://gcn.gsfc.nasa.gov/maxi.html" type="url" />
+  </How>
+  <Why importance="0.9">
+    <Inference probability="0.8">
+      <Concept>process.variation.burst;em.gamma</Concept>
+    </Inference>
+  </Why>
+  <Description>
+  </Description>
+</voe:VOEvent>
+"""
+DUMMY_VOEVENT_GCN_MAXI = textwrap.dedent(DUMMY_VOEVENT_GCN_MAXI).strip().encode('UTF-8')
+
+DUMMY_VOEVENT_GCN_SK_SN = u"""
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<voe:VOEvent
+      ivorn="ivo://nasa.gsfc.gcn/SK_SN#Event_2021-03-11T19:42:06.07_000001-069"
+      role="observation" version="2.0"
+      xmlns:voe="http://www.ivoa.net/xml/VOEvent/v2.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.ivoa.net/xml/VOEvent/v2.0  http://www.ivoa.net/xml/VOEvent/VOEvent-v2.0.xsd" >
+  <Who>
+    <AuthorIVORN>ivo://nasa.gsfc.tan/gcn</AuthorIVORN>
+    <Author>
+      <shortName>SK_SN (via VO-GCN/TAN)</shortName>
+      <contactName>Menjo Hiroaki</contactName>
+      <contactEmail>menjo@isee.nagoya-u.ac.jp</contactEmail>
+    </Author>
+    <Date>2021-03-17T19:31:36</Date>
+    <Description>This VOEvent message was created with GCN/TAN VOE version: 15.06 10feb21</Description>
+  </Who>
+  <What>
+    <Param name="Packet_Type"   dataType="int" value="175" />
+    <Param name="Pkt_Ser_Num"   dataType="int" value="1" />
+    <Param name="Trigger_Number" dataType="int" value="1" ucd="meta.id" />
+    <Param name="Pkt_TJD"       dataType="int" value="19284" unit="days" ucd="time" />
+    <Param name="Pkt_SOD"       dataType="float" value="70926.07" unit="sec" ucd="time" />
+    <Param name="Energy_Limit"  dataType="float" value="7.0" >
+                                  <Description>The lower energy limit of the neutrinos.</Description>
+                                  </Param>
+    <Param name="Duration"      dataType="float" value="6.8" >
+                                  <Description>The duration of the window for the collected neutrinos.</Description>
+                                  </Param>
+    <Param name="Src_Error68"   dataType="float" value="70.7" >
+                                  <Description>The location uncertainty with 68% containment.</Description>
+                                  </Param>
+    <Param name="Src_Error90"   dataType="float" value="118.0" >
+                                  <Description>The location uncertainty with 90% containment.</Description>
+                                  </Param>
+    <Param name="Src_Error95"   dataType="float" value="134.7" >
+                                  <Description>The location uncertainty with 95% containment.</Description>
+                                  </Param>
+    <Param name="N_Events"	dataType="int" value="11" >
+                                  <Description>The number of neutrinos in the event.</Description>
+                                  </Param>
+    <Param name="Min_Distance"  dataType="float" value="152.80"  unit="kpc" >
+                                  <Description>The minimum distance to this SN.</Description>
+                                  </Param>
+    <Param name="Max_Distance"  dataType="float" value="237.62"  unit="kpc" >
+                                  <Description>The maximum distance to this SN.</Description>
+                                  </Param>
+    <Param name="Discovery_date" dataType="int" value="19284" />
+    <Param name="Discovery_time" dataType="int" value="70926.07"  unit="sec" />
+  </What>
+  <WhereWhen>
+    <ObsDataLocation>
+      <ObservatoryLocation id="GEOLUN" />
+      <ObservationLocation>
+        <AstroCoordSystem id="UTC-FK5-GEO" />
+        <AstroCoords coord_system_id="UTC-FK5-GEO">
+          <Time unit="s">
+            <TimeInstant>
+              <ISOTime>2021-03-11T19:42:06.07</ISOTime>
+            </TimeInstant>
+          </Time>
+          <Position2D unit="deg">
+            <Name1>RA</Name1>
+            <Name2>Dec</Name2>
+            <Value2>
+              <C1>213.2599</C1>
+              <C2>15.2400</C2>
+            </Value2>
+            <Error2Radius>0.0000</Error2Radius>
+          </Position2D>
+        </AstroCoords>
+      </ObservationLocation>
+    </ObsDataLocation>
+  <Description>The RA,Dec coordinates are of the type: pointing_direction.</Description>
+  </WhereWhen>
+  <How>
+    <Description>SK_SN SuperKamiokande SuperNova search</Description>
+    <Reference uri="http://gcn.gsfc.nasa.gov/gcn/sk_sn.html" type="url" />
+  </How>
+  <Why importance="1.0">
+    <Inference probability="1.0">
+      <Concept>process.variation.burst;em</Concept>
+    </Inference>
+  </Why>
+  <Description>
+  </Description>
+</voe:VOEvent>
+"""
+DUMMY_VOEVENT_GCN_SK_SN = textwrap.dedent(DUMMY_VOEVENT_GCN_SK_SN).strip().encode('UTF-8')
