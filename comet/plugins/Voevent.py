@@ -18,7 +18,8 @@ from comet.utility.xml import xml_document
 from ligo.skymap.io.fits import read_sky_map
 from ligo.skymap.postprocess.contour import contour as ligo_contour
 from comet.plugins.test.test_voevents import DUMMY_VOEVENT_GCN, DUMMY_VOEVENT_INTEGRAL, DUMMY_VOEVENT_CHIME, \
-    DUMMY_VOEVENT_LIGO, DUMMY_VOEVENT_LIGO_INITIAL, DUMMY_VOEVENT_LIGO_PRELIMINARY, DUMMY_VOEVENT_GCN_FERMI
+    DUMMY_VOEVENT_LIGO, DUMMY_VOEVENT_LIGO_INITIAL, DUMMY_VOEVENT_LIGO_PRELIMINARY, DUMMY_VOEVENT_GCN_FERMI, \
+    DUMMY_VOEVENT_GCN_MAXI
 
 class DummyEvent(object):
     """
@@ -31,6 +32,7 @@ class DummyEvent(object):
     ligo = xml_document(DUMMY_VOEVENT_LIGO)
     ligo2 = xml_document(DUMMY_VOEVENT_LIGO_PRELIMINARY)
     ligo_initial = xml_document(DUMMY_VOEVENT_LIGO_INITIAL)
+    maxi = xml_document(DUMMY_VOEVENT_GCN_MAXI)
 
 
 class Voevent(object):
@@ -376,6 +378,7 @@ if __name__ == "__main__":
     voe_ligo = vp.loads(dummyevents.ligo.raw_bytes)
     voe_ligo_2 = vp.loads(dummyevents.ligo2.raw_bytes)
     voe_ligo_init = vp.loads(dummyevents.ligo_initial.raw_bytes)
+    voe_maxi = vp.loads(dummyevents.maxi.raw_bytes)
 
     v_chime = Voevent(voe_chime)
     v_gcn = Voevent(voe_gcn)
@@ -384,6 +387,7 @@ if __name__ == "__main__":
     v_ligo2 = Voevent(voe_ligo_2)
     v_fermi = Voevent(voe_fermi)
     v_ligo_init = Voevent(voe_ligo_init)
+    v_maxi = Voevent(voe_maxi)
 
     print(v_chime)
     print(v_gcn)
@@ -392,4 +396,5 @@ if __name__ == "__main__":
     print(v_ligo)
     print(v_ligo2)
     print(v_ligo_init)
+    print(v_maxi)
 

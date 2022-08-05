@@ -796,7 +796,7 @@ DUMMY_VOEVENT_GCN_MAXI = u"""
     <Description>This VOEvent message was created with GCN VOE version: 15.08 17jun22</Description>
   </Who>
   <What>
-    <Param name="Packet_Type"      value="136" />
+    <Param name="Packet_Type"      value="135" />
     <Param name="Pkt_Ser_Num"      value="288" />
     <Param name="TrigID"           value="599999" ucd="meta.id" />
     <Param name="Event_TJD"        value="19794" unit="days" ucd="time" />
