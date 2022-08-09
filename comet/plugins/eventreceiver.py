@@ -83,16 +83,16 @@ class EventReceiver(object):
                 voevent.seqNum = 0
 
         #send email
-        if voevent.instrumentID == 19:
+        if voevent.instrumentID in [150, 151, 152, 163, 158, 169, 173, 174]:
 
             mail = Mail("alert.agile@inaf.it", os.environ["MAIL_PASS"])
 
-            to = ["antonio.addis@inaf.it", "adaant@gmail.com"]
+            to = ["antonio.addis@inaf.it"]
 
-            subject = 'LIGO alert'
+            subject = f'Notice alert for {voevent.name}'
 
-            body = f'LIGO detected an event at {voevent.isoTime} for triggerID {voevent.triggerId} \n available at \n \
-            http://afiss.iasfbo.inaf.it/afiss/full_results.html?instrument_name=LIGO_TEST&trigger_time_utc={voevent.isoTime}&trigger_id={voevent.triggerId}l&seqnum={voevent.seqNum}'
+            body = f'We detected an {voevent.name} event at {voevent.isoTime} for triggerID {voevent.triggerId} \n available at \n \
+            http://afiss.iasfbo.inaf.it/afiss/full_results.html?instrument_name={voevent.name}&trigger_time_utc={voevent.isoTime}&trigger_id={voevent.triggerId}l&seqnum={voevent.seqNum}'
 
             mail.send_email(to, subject, body)
 

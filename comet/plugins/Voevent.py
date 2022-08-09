@@ -49,6 +49,7 @@ class Voevent(object):
         self.mark_notice()
         self.ste = self.is_ste()
         self.instrumentId = self.get_instrumentid_from_packet_type()
+        self.name = ""
         self.seqNum = -1
         self.triggerId = self.get_triggerID()
         self.packetType = self.get_packet_tipe()
@@ -116,35 +117,49 @@ class Voevent(object):
             packet_type = int(self.voevent.What.Param[0].attrib["value"])
 
             if packet_type in [53,54,55]: # INTEGRAL FROM GCN
+                self.name = "INTEGRAL"
                 return 23
             elif packet_type == 97: #SWIFT 
+                self.name = "SWIFT"
                 return 3
             elif packet_type == 111:  #FERMI_GBM 
+                self.name = "FERMI_GBM"
                 return 1
             elif packet_type in [125,128]: #FERMI_LAT 
+                self.name = "FERMI_LAT"
                 return 2
             elif packet_type == 105: #AGILE_MCAL FROM GCN
+                self.name = "AGILE_MCAL"
                 return 5
             elif packet_type in [150, 151, 152, 163]: #LIGO and LIGO_TEST TBD
                 if  "test" in self.voevent.attrib['role']:
+                    self.name = "LIGO_TEST"
                     return 19
                 if  "observation" in self.voevent.attrib['role']:
+                    self.name = "LIGO"
                     return 7
             elif packet_type == 158: #ICECUBE_HESE
+                self.name = "ICECUBE_HESE"
                 return 8
             elif packet_type == 169: #ICECUBE_EHE
+                self.name = "ICECUBE_EHE"
                 return 10
             elif packet_type == 173: #ICECUBE_ASTROTRACK_GOLD
+                self.name = "ICECUBE_ASTROTRACK_GOLD"
                 return 21
-            elif packet_type == 174: #ICECUBE_ASTROTRACK_GOLD
+            elif packet_type == 174: #ICECUBE_ASTROTRACK_BRONZE
+                self.name = "ICECUBE_ASTROTRACK_BRONZE"
                 return 22
             elif packet_type == 59: #KONUS
+                self.name = "KONUS"
                 return 25
             elif packet_type == 134: #MAXI_UNKNOWN
+                self.name = "MAXI_UNKNOWN"
                 return 26
             elif packet_type == 135: #MAXI_KNOWN
+                self.name = "MAXI_KNOWN"
                 return 27
-            #elif packet_type == 175: #SK_SN NOT SUPPORTED
+            #elif packet_type == 175: #SK_SN NOT supported triggerid not available
                 #return 28
             else:
                 log.info(f"Voevent with packet type {packet_type} not supported")
