@@ -14,8 +14,8 @@ class Mail():
 
         msg = EmailMessage()
         msg.set_content(body)
-        msg['Subject'] = f'{subject}'
-        msg['From'] = f"{self.gmail_user}"
+        msg['Subject'] = subject
+        msg['From'] = self.gmail_user
         msg['To'] = ', '.join(to)
 
 
