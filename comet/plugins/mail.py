@@ -11,13 +11,11 @@ class Mail():
 
     def send_email(self, to, subject, body):
 
-
         msg = EmailMessage()
         msg.set_content(body)
         msg['Subject'] = subject
         msg['From'] = self.gmail_user
         msg['To'] = ', '.join(to)
-
 
         try:
 

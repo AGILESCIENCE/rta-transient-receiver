@@ -18,7 +18,7 @@ from zope.interface import implementer
 from astropy.coordinates import SkyCoord
 
 from comet.plugins.Voevent import Voevent
-
+from comet.plugins.mail import Mail
 
 # Server parameters
 db_config = {'user': 'afiss', 'password': '', 'host': '127.0.0.1', 'port': 60306, 'database': 'afiss_rta_pipe_test_3'}
@@ -29,8 +29,7 @@ class EventReceiver(object):
     
     name = "receive-event"
     print("receive event attivo")
-
-
+    
     def add_notice_mysql(self, voevent):
         
         try:
@@ -66,7 +65,6 @@ class EventReceiver(object):
             cursor.execute(query)
             cnx.commit()
 
-
             receivedsciencealertid = cursor.lastrowid
         else:
             receivedsciencealertid = int(check_rsa[0])
@@ -83,6 +81,20 @@ class EventReceiver(object):
                 voevent.seqNum = int(result_seqnum[0]) + 1 
             except:
                 voevent.seqNum = 0
+
+        #send email
+        if voevent.instrumentID == 19:
+
+            mail = Mail("alert.agile@inaf.it", os.environ["MAIL_PASS"])
+
+            to = ["antonio.addis@inaf.it", "adaant@gmail.com"]
+
+            subject = 'LIGO alert'
+
+            body = f'LIGO detected an event at {voevent.isoTime} for triggerID {voevent.triggerId} \n available at \n \
+            http://afiss.iasfbo.inaf.it/afiss/full_results.html?instrument_name=LIGO_TEST&trigger_time_utc={voevent.isoTime}&trigger_id={voevent.triggerId}l&seqnum={voevent.seqNum}'
+
+            mail.send_email(to, subject, body)
 
         #last handling
         ######################
