@@ -48,12 +48,12 @@ class Voevent(object):
         self.AGILE = False
         self.mark_notice()
         self.ste = self.is_ste()
-        self.instrumentId = self.get_instrumentid_from_packet_type()
         self.name = ""
+        self.instrumentId = self.get_instrumentid_from_packet_type()
         self.seqNum = -1
         self.triggerId = self.get_triggerID()
         self.packetType = self.get_packet_tipe()
-        self.isoTime = self.get_time_from_voe()
+        self.isoTime, self.UTC = self.get_time_from_voe()
         self.networkId = self.get_networkID()
         self.l, self.b = self.get_l_b()
         self.error = self.get_position_error()
@@ -166,10 +166,13 @@ class Voevent(object):
                 raise Exception(f"Voevent with packet type {packet_type} not supported")
 
         if self.CHIME:
+            self.name = "CHIME"
             return 24 
         if self.INTEGRAL: # INTEGRAL subthrsld from James Rodi
+            self.name = "INTEGRAL"
             return 23
         if self.AGILE:  #AGILE MCAL subtrheshold from AGILE's TEAM
+            self.name = "AGILE_MCAL"
             return 5
         log.info("Voevent not supported")
         raise Exception("Voevent not supported")
@@ -223,7 +226,7 @@ class Voevent(object):
         iso_time = self.voevent.WhereWhen.ObsDataLocation.ObservationLocation.AstroCoords.Time.TimeInstant.ISOTime.text
 
         t = Time(iso_time, format="fits", scale="utc")
-        return np.round(t.unix - 1072915200)
+        return np.round(t.unix - 1072915200), t.fits
 
     def get_networkID(self):
         """
@@ -376,7 +379,7 @@ class Voevent(object):
         return "none"
 
     def __str__(self):
-        return f"Voevent\nIntrumentID: {self.instrumentId}, seqNum {self.seqNum}, triggerid: {self.triggerId}, packetType: {self.packetType},time: {self.isoTime}, l: {self.l}, b: {self.b}, contour: {self.contour}, url: {self.url}"
+        return f"Voevent\nIntrumentID: {self.instrumentId}, name:{self.name}, seqNum {self.seqNum}, triggerid: {self.triggerId}, packetType: {self.packetType},time: {self.isoTime}, l: {self.l}, b: {self.b}, contour: {self.contour}, url: {self.url}"
 
 
 if __name__ == "__main__":
