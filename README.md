@@ -1,6 +1,19 @@
 # rta-transient-receiver
 
-Plugin used to receive VoEvents from different instruments, it supports the GCN Network and chimenet. It is used for AGILE and AFIS project.
+rta-transient-receiver is a COMET plugin for handling VoEvents notices in the context of the AFIS project (AHEAD2020) and AGILE mission.  The plugin writes the notices in a MySQL database and performs several processes for detecting a possible correlation among instruments. Then it sends an email alert to the team for further analysis.
+
+The current list of the supported instruments is:
+
+- AGILE_MCAL
+- CHIME
+- FERMI_GBM
+- FERMI_LAT
+- ICECUBE
+- INTEGRAL
+- KONUS/WIND
+- LIGO
+- MAXI
+- SWIFT
 
 ## Installation
 The dependencies are listed in the file requirement.txt. It is recommended to install them into a venv enviromnent.
