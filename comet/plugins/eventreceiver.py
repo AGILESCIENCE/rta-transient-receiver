@@ -19,6 +19,7 @@ from astropy.coordinates import SkyCoord
 
 from comet.plugins.Voevent import Voevent
 from comet.plugins.mail import Mail
+from comet.plugins.utils import Utils
 
 # Server parameters
 db_config = {'user': 'afiss', 'password': '', 'host': '127.0.0.1', 'port': 60306, 'database': 'afiss_rta_pipe_test_3'}
@@ -83,16 +84,16 @@ class EventReceiver(object):
                 voevent.seqNum = 0
 
         #send email
-        if voevent.instrumentID in [150, 151, 152, 163, 158, 169, 173, 174]:
+        if voevent.packetType in ["150", "151", "152", "163", "158", "169", "173", "174"]:
 
             mail = Mail("alert.agile@inaf.it", os.environ["MAIL_PASS"])
 
-            to = ["antonio.addis@inaf.it"]
+            to = ["antonio.addis@inaf.it", "nicolo.parmiggiani@inaf.it"]
 
             subject = f'Notice alert for {voevent.name}'
 
-            body = f'We detected an {voevent.name} event at {voevent.isoTime} for triggerID {voevent.triggerId} \n available at \n \
-            http://afiss.iasfbo.inaf.it/afiss/full_results.html?instrument_name={voevent.name}&trigger_time_utc={voevent.isoTime}&trigger_id={voevent.triggerId}l&seqnum={voevent.seqNum}'
+            body = f'We detected a {voevent.name} event at {voevent.UTC} for triggerID {voevent.triggerId} {chr(10)} available at \
+            http://afiss.iasfbo.inaf.it/afiss/full_results.html?instrument_name={voevent.name}&trigger_time_utc={voevent.UTC}&trigger_id={Utils.graceID_from_triggerId(voevent.name, voevent.triggerId)}&seqnum={voevent.seqNum}'
 
             mail.send_email(to, subject, body)
 
