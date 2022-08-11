@@ -12,33 +12,33 @@ class Utils:
     def graceID_from_triggerId(mission, triggerID):
 
         
-        IDENTITY = triggerID
-        MISSION = mission
+        identity = triggerID
+        mission = mission
 
-        GW_ALERT_ID = 0
+        gw_alert_id = 0
 
-        if MISSION == 'LIGO_TEST' or MISSION == 'LIGO':
+        if mission == 'LIGO_TEST' or mission == 'LIGO':
 
             THRESHOLD = 4.0
 
-            if MISSION == 'LIGO_TEST':
-                CHAR = 'MS'
-            elif MISSION == 'LIGO':
-                CHAR = 'S'
+            if mission == 'LIGO_TEST':
+                char = 'MS'
+            elif mission == 'LIGO':
+                char = 'S'
 
-            if len(IDENTITY[6:]) == 2:
-                GW_ALERT_ID = "%s%s%s" % (CHAR, IDENTITY[:6], chr(int(IDENTITY[6:8])+96))
-                print("GW_ALERT_ID = ", GW_ALERT_ID)
-            if len(IDENTITY[6:]) == 4:
-                GW_ALERT_ID = "%s%s%s%s" % (CHAR, IDENTITY[:6], chr(int(IDENTITY[6:8])+96), chr(int(IDENTITY[8:10])+96))
-                print ("GW_ALERT_ID = ", GW_ALERT_ID)
-            if len(IDENTITY[6:]) == 6:
-                GW_ALERT_ID = "%s%s%s%s%s" % (CHAR, IDENTITY[:6], chr(int(IDENTITY[6:8])+96), chr(int(IDENTITY[8:10])+96), chr(int(IDENTITY[10:12])+96))
-                print ("GW_ALERT_ID = ", GW_ALERT_ID)
-            if len(IDENTITY[6:]) == 8:
-                GW_ALERT_ID = "%s%s%s%s%s" % (CHAR, IDENTITY[:6], chr(int(IDENTITY[6:8])+96), chr(int(IDENTITY[8:10])+96), chr(int(IDENTITY[10,12])+96), chr(int(IDENTITY[12,14])+96))
-                print("GW_ALERT_ID = ", GW_ALERT_ID)
+            if len(identity[6:]) == 2:
+                gw_alert_id = "%s%s%s" % (char, identity[:6], chr(int(identity[6:8])+96))
+                #print("gw_alert_id = ", gw_alert_id)
+            if len(identity[6:]) == 4:
+                gw_alert_id = "%s%s%s%s" % (char, identity[:6], chr(int(identity[6:8])+96), chr(int(identity[8:10])+96))
+                #print ("gw_alert_id = ", gw_alert_id)
+            if len(identity[6:]) == 6:
+                gw_alert_id = "%s%s%s%s%s" % (char, identity[:6], chr(int(identity[6:8])+96), chr(int(identity[8:10])+96), chr(int(identity[10:12])+96))
+                #print ("gw_alert_id = ", gw_alert_id)
+            if len(identity[6:]) == 8:
+                gw_alert_id = "%s%s%s%s%s" % (char, identity[:6], chr(int(identity[6:8])+96), chr(int(identity[8:10])+96), chr(int(identity[10,12])+96), chr(int(identity[12,14])+96))
+                #print("gw_alert_id = ", gw_alert_id)
         else:
-            GW_ALERT_ID = triggerID
+            gw_alert_id = triggerID
         
-        return GW_ALERT_ID
+        return gw_alert_id
