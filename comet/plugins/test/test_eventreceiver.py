@@ -9,7 +9,7 @@ from comet.utility.xml import xml_document
 from comet.plugins.eventreceiver import EventReceiver
 from comet.plugins.test.test_voevents import DUMMY_VOEVENT_GCN, DUMMY_VOEVENT_INTEGRAL, DUMMY_VOEVENT_CHIME, \
     DUMMY_VOEVENT_LIGO, DUMMY_VOEVENT_LIGO_INITIAL, DUMMY_VOEVENT_LIGO_PRELIMINARY, DUMMY_VOEVENT_GCN_FERMI, \
-    DUMMY_VOEVENT_AGILE
+    DUMMY_VOEVENT_AGILE, DUMMY_VOEVENT_AGILE_CORRELATIONS, DUMMY_VOEVENT_FERMI_CORRELATIONS
 
 
 class DummyEvent(object):
@@ -24,6 +24,8 @@ class DummyEvent(object):
     ligo_preliminary = xml_document(DUMMY_VOEVENT_LIGO_PRELIMINARY)
     ligo_initial = xml_document(DUMMY_VOEVENT_LIGO_INITIAL)
     agile_ste = xml_document(DUMMY_VOEVENT_AGILE)
+    fermi_correlations = xml_document(DUMMY_VOEVENT_FERMI_CORRELATIONS)
+    agile_correlations = xml_document(DUMMY_VOEVENT_AGILE_CORRELATIONS)
 
 
 class EventReceiverTestCase(unittest.TestCase):
@@ -69,3 +71,9 @@ class EventReceiverTestCase(unittest.TestCase):
 
     def test_write_agile_ste(self):
         request = self.event_receiver(self.dummyevents.agile_ste)
+        self.assertTrue(request)
+
+    def test_write_agile_fermi_correlation(self):
+        request = self.event_receiver(self.dummyevents.fermi_correlations)
+        request = self.event_receiver(self.dummyevents.agile_correlations)
+        self.assertTrue(request)
