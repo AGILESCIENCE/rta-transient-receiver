@@ -105,7 +105,7 @@ class EventReceiver(object):
         
         mail = Mail("alert.agile@inaf.it", os.environ["MAIL_PASS"])
         
-        if voevent.packetType in ["150", "151", "152", "163", "158", "169", "173", "174"]: #it will send an email for GW or Neutrino event
+        if voevent.packetType in ["150", "151", "152", "163", "158", "169", "173", "174"] or voevent.ste: #it will send an email for GW, Neutrino event or STE events
 
             
 
@@ -113,17 +113,17 @@ class EventReceiver(object):
 
             subject = f'Notice alert for {voevent.name}'
 
-            body = f'We detected a {voevent.name} event at {voevent.UTC} for triggerID {voevent.triggerId} {chr(10)} available at \
+            body = f'The AFIS platform received a notice for the {voevent.name} event at {voevent.UTC} for triggerID {voevent.triggerId} {chr(10)} available at \
             http://afiss.iasfbo.inaf.it/afiss/full_results.html?instrument_name={voevent.name}&trigger_time_utc={voevent.UTC}&trigger_id={Utils.graceID_from_triggerId(voevent.name, voevent.triggerId)}&seqnum={voevent.seqNum}'
 
             mail.send_email(to, subject, body)
         
         #check if there are correlated instruments and send an email if so
-        query = f"select ins.name,n.seqnum,n.noticetime,rsa.receivedsciencealertid, rsa.triggerid,rsa.ste,rsa.time as `trigger_time`,ste,notice,JSON_PRETTY(n.attributes) as `attributes` from notice n join receivedsciencealert rsa on ( rsa.receivedsciencealertid = n.receivedsciencealertid) join instrument ins on(ins.instrumentid = rsa.instrumentid) where  ins.name != {voevent.instrumentId} and rsa.instrumentid != 19 and rsa.time >= {voevent.isoTime - 10} and rsa.time <= {voevent.isoTime + 10} and n.seqnum = (select max(seqnum) from notice n2 join receivedsciencealert rsa2 on ( rsa2.receivedsciencealertid = n2.receivedsciencealertid)  where  rsa.triggerid = rsa2.triggerid ) order by n.noticetime"
+        query = f"select ins.name,n.seqnum,n.noticetime,rsa.receivedsciencealertid, rsa.triggerid,rsa.ste,rsa.time as `trigger_time`,ste,notice,JSON_PRETTY(n.attributes) as `attributes` from notice n join receivedsciencealert rsa on ( rsa.receivedsciencealertid = n.receivedsciencealertid) join instrument ins on(ins.instrumentid = rsa.instrumentid) where  ins.name != '{voevent.name}' and rsa.instrumentid != 19 and rsa.time >= {voevent.isoTime - 10} and rsa.time <= {voevent.isoTime + 10} and n.seqnum = (select max(seqnum) from notice n2 join receivedsciencealert rsa2 on ( rsa2.receivedsciencealertid = n2.receivedsciencealertid)  where  rsa.triggerid = rsa2.triggerid ) order by n.noticetime"
         cursor.execute(query)
         results_row = cursor.fetchall()
 
-        print(f"resulsts row is {results_row}")
+        #print(f"resulsts row is {results_row}")
 
         if results_row:
             for row in results_row:
@@ -132,7 +132,7 @@ class EventReceiver(object):
                 cursor.execute(query)
                 cnx.commit()
 
-            query = f"SELECT ins.name, max(n.seqnum),n.noticetime, n.receivedsciencealertid, rsa.triggerid,rsa.ste,rsa.time as `trigger_time`,notice from notice n join correlations c on (n.receivedsciencealertid = c.rsaId2) join receivedsciencealert rsa on ( rsa.receivedsciencealertid = n.receivedsciencealertid) join instrument ins on (ins.instrumentid = rsa.instrumentid) where c.rsaId1 = {receivedsciencealertid} group by n.receivedsciencealertid"
+            query = f"SELECT ins.name, max(n.seqnum),n.noticetime, n.receivedsciencealertid, rsa.triggerid,rsa.ste,rsa.time as `trigger_time` from notice n join correlations c on (n.receivedsciencealertid = c.rsaId2) join receivedsciencealert rsa on ( rsa.receivedsciencealertid = n.receivedsciencealertid) join instrument ins on (ins.instrumentid = rsa.instrumentid) where c.rsaId1 = {receivedsciencealertid} group by n.receivedsciencealertid"
             cursor.execute(query)
 
             results_row = cursor.fetchall()
@@ -142,7 +142,7 @@ class EventReceiver(object):
 
             subject = f'Correlations for {voevent.name}'
 
-            body = f'We detected for {voevent.name} at {voevent.UTC} for triggerID {voevent.triggerId} {chr(10)} available at \
+            body = f'The AFIS platform received a notice for the {voevent.name} at {voevent.UTC} for triggerID {voevent.triggerId} {chr(10)} available at \
             http://afiss.iasfbo.inaf.it/afiss/full_results.html?instrument_name={voevent.name}&trigger_time_utc={voevent.UTC}&trigger_id={Utils.graceID_from_triggerId(voevent.name, voevent.triggerId)}&seqnum={voevent.seqNum} {chr(10)} with the following correlated events: {chr(10)} {str(results_row)}'
 
             mail.send_email(to, subject, body)
