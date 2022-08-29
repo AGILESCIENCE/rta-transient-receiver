@@ -2,6 +2,8 @@ import os
 import smtplib
 from email.message import EmailMessage
 
+
+
 class Mail():
 
     def __init__(self, gmail_user, gmail_password) -> None:
@@ -25,7 +27,7 @@ class Mail():
 
             smtp_server.login(self.gmail_user, self.gmail_password)
 
-            print(msg)
+            #print(msg)
 
             smtp_server.send_message(msg)
 
