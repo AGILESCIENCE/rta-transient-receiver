@@ -21,9 +21,6 @@ from comet.plugins.Voevent import Voevent
 from comet.plugins.mail import Mail
 from comet.plugins.utils import Utils
 
-# Server parameters
-db_config = {'user': 'afiss', 'password': '', 'host': '127.0.0.1', 'port': 60306, 'database': 'afiss_rta_pipe_test_3'}
-
 # Event handlers must implement IPlugin and IHandler.
 @implementer(IPlugin, IHandler)
 class EventReceiver(object):
@@ -34,14 +31,16 @@ class EventReceiver(object):
     def add_notice_mysql(self, voevent):
         
         try:
-
-            cnx = mysql.connector.connect(user=db_config['user'], password=os.environ["MYSQL_AFISS"],
-                              host=db_config['host'], port=db_config['port'],
-                              database=db_config['database'])
+            #the server parameter must be set as environment variable
+            #e.g.
+            # USER = afiss, PASSWORD = '', HOST='127.0.0.1', PORT=8036, DATABASE=db1
+            cnx = mysql.connector.connect(user=os.environ["USER"], password=os.environ["MYSQL_AFISS"],
+                              host=os.environ["HOST"], port=os.environ["PORT"],
+                              database=os.environ["DATABASE"])
 
         except mysql.connector.Error as err:
             if err.errno == mysql.connector.errorcode.ER_ACCESS_DENIED_ERROR:
-                print("Something is wrong with your user name or password")
+                print("Something is wrong with your user name or password, please set the current parameter as env variable")
             elif err.errno == mysql.connector.errorcode.ER_BAD_DB_ERROR:
                 print("Database does not exist")
             else:
